@@ -20,16 +20,18 @@ radioPartyHorn = document.getElementById("radio-party-horn");
 honkButton = document.getElementById("honk-btn");
 
 
-// volume event listeners
+// disable submit default behavior
 partyHornForm.addEventListener('submit', function(e) {
     e.preventDefault();
 }, false);
 
+// volume event listeners
 volumeNumber.addEventListener("input", function () {
   hornSound.volume = volumeNumber.value / 100; 
   volumeSlider.value = volumeNumber.value;
   let n = (volumeNumber.value == 0) ? 0 : ((volumeNumber.value / 33.4) >> 0) + 1;
   volumeImage.src = `./assets/media/icons/volume-level-${n}.svg`;
+  honkButton.disabled = !n;
 });
 
 volumeSlider.addEventListener("input", function() {
@@ -37,6 +39,7 @@ volumeSlider.addEventListener("input", function() {
   volumeNumber.value = volumeSlider.value;
   let n = (volumeNumber.value == 0) ? 0 : ((volumeNumber.value / 33.4) >> 0) + 1;
   volumeImage.src = `./assets/media/icons/volume-level-${n}.svg`;
+  honkButton.disabled = !n;
 });
 
 // audio selection event listeners
