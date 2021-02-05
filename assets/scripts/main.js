@@ -27,6 +27,7 @@ partyHornForm.addEventListener('submit', function(e) {
 
 // volume event listeners
 volumeNumber.addEventListener("input", function () {
+  if (volumeNumber.value > 100) volumeNumber.value = 100;
   hornSound.volume = volumeNumber.value / 100; 
   volumeSlider.value = volumeNumber.value;
   let n = (volumeNumber.value == 0) ? 0 : ((volumeNumber.value / 33.4) >> 0) + 1;
@@ -37,7 +38,7 @@ volumeNumber.addEventListener("input", function () {
 volumeSlider.addEventListener("input", function() {
   hornSound.volume = volumeSlider.value / 100; 
   volumeNumber.value = volumeSlider.value;
-  let n = (volumeNumber.value == 0) ? 0 : ((volumeNumber.value / 33.4) >> 0) + 1;
+  let n = (volumeSlider.value == 0) ? 0 : ((volumeSlider.value / 33.4) >> 0) + 1;
   volumeImage.src = `./assets/media/icons/volume-level-${n}.svg`;
   honkButton.disabled = !n;
 });
